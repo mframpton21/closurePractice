@@ -62,23 +62,24 @@ console.log(count()); // 4
 // After the function has been called N number of times, console.log('STAHHP');
 // Code here
 var outerFn = function(func, nTimes) {
-  var i = 0;  
+  var count = 0;  
   return function() {
-    if (i >= nTimes) {
+    if (count >= nTimes) {
       console.log('STAHHP');
       return
     }
-    i++;
+    count++;
     return func();
   }
 };
+
+var timesToLoop = 5;
 var innerFn = outerFn(function(){
   alert("Not there yet - try again");
-}, 5);
-console.log(innerFn());
-console.log(innerFn());
-console.log(innerFn());
-console.log(innerFn());
-console.log(innerFn());
-console.log(innerFn());
-console.log(innerFn());
+}, timesToLoop);
+
+for (var i = 0; i <= timesToLoop; i++) {
+  if (innerFn()) {
+    console.log(innerFn());
+  }
+}
