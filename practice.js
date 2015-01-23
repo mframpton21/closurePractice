@@ -6,21 +6,20 @@ var outer = function(){
     return 'The original name was ' + name;
   }
 }
-//Above you're given a function that returns another function which has a closure over the name variable.
-//Invoke outer saving the return value into another variable called 'inner'.
 
-  //Code Here
+// PROBLEM 1
+// Above you're given a function that returns another function which has a closure over the name variable.
+// Invoke outer saving the return value into another variable called 'inner'.
+// Code Here
+var inner = outer();
 
-//Once you do that, invoke inner.
-
-  //Code Here
-
-
-
-//Next problem
+// Once you do that, invoke inner.
+// Code Here
+var result = inner();
 
 
 
+// PROBLEM 2
 var callFriend = function(){
   var friend = 'Jake';
   function callF(number){
@@ -29,41 +28,57 @@ var callFriend = function(){
   return callF;
 };
 
-//Above you're given a callFriend function that returns another function.
-//Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
-
-  //Code Here
-
-
-
-//Next Problem
+// Above you're given a callFriend function that returns another function.
+// Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
+// Code Here
+var inner = callFriend();
+var result = inner("435-215-9248");
+console.log(result);
 
 
 
-/*
-  Write a function called makeCounter that makes the following code work properly.
-*/
+// PROBLEM 3
+// Write a function called makeCounter that makes the following code work properly.
+// Code here
+var makeCounter = function() {
+  var i = 1;
+  return function() {
+    return i++;
+  }
+};
 
-  //Code Here
-  var count = makeCounter();
-  count() // 1
-  count() // 2
-  count() // 3
-  count() // 4
-
-
-
-//Next Problem
-
-
-
-/*
-  Write a function that accepts another function as it's only argument and returns a new function
-  (which invokes the original function that was passed in) that can only ever be executed once.
-  Once completed, add a second arguments that allows the function to be invoked N number of times.
-  After the function has been called N number of times, console.log('STAHHP');
-*/
+var count = makeCounter();
+console.log(count()); // 1
+console.log(count()); // 2
+console.log(count()); // 3
+console.log(count()); // 4
 
 
 
-
+// PROBLEM 4
+// Write a function that accepts another function as it's only argument and returns a new function
+// (which invokes the original function that was passed in) that can only ever be executed once.
+// Once completed, add a second arguments that allows the function to be invoked N number of times.
+// After the function has been called N number of times, console.log('STAHHP');
+// Code here
+var outerFn = function(func, nTimes) {
+  var i = 0;  
+  return function() {
+    if (i >= nTimes) {
+      console.log('STAHHP');
+      return
+    }
+    i++;
+    return func();
+  }
+};
+var innerFn = outerFn(function(){
+  alert("Not there yet - try again");
+}, 5);
+console.log(innerFn());
+console.log(innerFn());
+console.log(innerFn());
+console.log(innerFn());
+console.log(innerFn());
+console.log(innerFn());
+console.log(innerFn());
